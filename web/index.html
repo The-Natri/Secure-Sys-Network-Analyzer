@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE.SYS // Network Sentinel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="dashboard">
+        <header>
+            <div class="brand">
+                <span class="icon">🛡️</span> SECURE.SYS <span class="version">v4.0</span>
+            </div>
+            <div class="sys-stats">
+                <span class="stat">STATUS: <span class="online">ONLINE</span></span>
+                <span class="stat">CPU: <span class="random-stat">12%</span></span>
+                <span class="stat">MEM: <span class="random-stat">404MB</span></span>
+            </div>
+        </header>
+
+        <main>
+            <section class="control-panel">
+                <div class="dfa-visualizer">
+                    <div class="state-container">
+                        <div class="state-node active" id="node-q0">q0</div>
+                        <div class="connector" id="conn-0-1"></div>
+                
+                        <div class="state-node" id="node-q1">q1</div>
+                        <div class="connector" id="conn-1-2"></div>
+                
+                        <div class="state-node" id="node-q2">q2</div>
+                        <div class="connector" id="conn-2-3"></div>
+                
+                        <div class="state-node double-ring" id="node-q3">q3</div>
+                    </div>
+                    <div class="dfa-label">PROTOCOL STATE MACHINE</div>
+                </div>
+                <div class="input-group">
+                    <label>PACKET INJECTION</label>
+                    <input type="text" id="messageInput" placeholder="HTpacket_data} or attack_string..."
+                        autocomplete="off">
+                </div>
+                <button onclick="analyzeMessage()" id="scanBtn">INITIATE SCAN</button>
+
+                <div class="verdict-box hidden" id="final-verdict-box">
+                    <div class="verdict-label">FINAL VERDICT</div>
+                    <div id="verdict-text" class="verdict-result">WAITING</div>
+                </div>
+            </section>
+
+            <section class="modules-grid">
+                <div class="module" id="mod-structure" title="Complexity: O(n) | Linear Time Scanning">
+                    <div class="mod-header">DFA_LAYER_01 // STRUCTURE</div>
+                    <div class="mod-status pending">IDLE</div>
+                    <div class="mod-details">Protocol Verification</div>
+                </div>
+
+                <div class="module" id="mod-firewall">
+                    <div class="mod-header">DFA_LAYER_02 // CONTENT</div>
+                    <div class="mod-status pending">IDLE</div>
+                    <div class="mod-details">Signature Scanning</div>
+                </div>
+
+                <div class="module" id="mod-ml">
+                    <div class="mod-header">AI_CORE // ANOMALY</div>
+                    <div class="mod-status pending">IDLE</div>
+                    <div class="mod-details">Heuristic Analysis</div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="terminal-window">
+            <div class="term-header">:: SYSTEM LOGS ::</div>
+            <footer class="terminal-window">
+                <div class="term-header">
+                    :: SYSTEM LOGS ::
+                    <span class="clear-btn" onclick="clearLogs()">[ CLEAR ]</span>
+                    <span style="float: right; cursor: pointer; color: red;"
+                        onclick="document.getElementById('terminal-logs').innerHTML=''">[ CLEAR LOGS ]</span>
+                </div>
+                <div class="term-body" id="terminal-logs">
+                </div>
+            </footer>
+            <div class="term-body" id="terminal-logs">
+                <div class="log-line">[SYS] System initialized...</div>
+                <div class="log-line">[SYS] ML Model loaded successfully.</div>
+                <div class="log-line">[SYS] Waiting for packet injection...</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

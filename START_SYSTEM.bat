@@ -1,0 +1,9 @@
+@echo off
+title SECURE.SYS // LAUNCHING CORE
+color 0a
+echo [SYSTEM] INITIALIZING ENVIRONMENT...
+echo [SYSTEM] LOADING AI MODELS...
+echo [SYSTEM] STARTING SERVER ON PORT 5100...
+start http://127.0.0.1:5100
+python app.py
+pause

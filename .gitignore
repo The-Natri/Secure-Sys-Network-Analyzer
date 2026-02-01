@@ -1,0 +1,14 @@
+# Ignore the virtual environment (It's huge and unnecessary)
+venv/
+env/
+
+# Ignore compiled python files
+__pycache__/
+*.pyc
+
+# Ignore system files
+.DS_Store
+
+# Optional: Ignore the model if you want users to train it themselves
+# security_model.pkl 
+# (Keep the model for now so your professor doesn't have to train it)

@@ -1,0 +1,368 @@
+/* RESET & FONTS */
+:root {
+    --bg-color: #050505;
+    --panel-bg: #0a0f14;
+    --text-main: #a7b6c5;
+    --accent-green: #00ff41;
+    /* Hacker Green */
+    --accent-red: #ff003c;
+    /* Cyber Red */
+    --accent-blue: #00f3ff;
+    /* Tron Blue */
+    --border-color: #1f2933;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Share Tech Mono', monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* SCANLINE OVERLAY EFFECT */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.dashboard {
+    width: 900px;
+    height: 85vh;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.brand {
+    font-size: 24px;
+    color: var(--accent-blue);
+    text-shadow: 0 0 10px var(--accent-blue);
+}
+
+.version {
+    font-size: 12px;
+    color: #555;
+    vertical-align: super;
+}
+
+.online {
+    color: var(--accent-green);
+    text-shadow: 0 0 5px var(--accent-green);
+}
+
+.sys-stats .stat {
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+/* MAIN GRID */
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* Controls (1 part) | Visuals (2 parts) */
+    gap: 20px;
+    flex-grow: 1;
+}
+
+/* CONTROLS */
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--accent-blue);
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+input {
+    width: 90%;
+    background: #000;
+    border: 1px solid var(--border-color);
+    color: var(--accent-green);
+    padding: 15px;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+}
+
+button {
+    background: rgba(0, 243, 255, 0.1);
+    color: var(--accent-blue);
+    border: 1px solid var(--accent-blue);
+    padding: 15px;
+    font-family: inherit;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+button:hover {
+    background: var(--accent-blue);
+    color: #000;
+    box-shadow: 0 0 20px var(--accent-blue);
+}
+
+.verdict-box {
+    margin-top: auto;
+    border: 2px solid var(--border-color);
+    padding: 20px;
+    text-align: center;
+    background: #000;
+}
+
+.verdict-label {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.verdict-result {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* MODULES (RIGHT SIDE) */
+.modules-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.module {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.module::before {
+    /* Scanning Line Animation */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+    transition: 0.5s;
+}
+
+.module:hover::before {
+    left: 100%;
+    transition: 0.5s;
+}
+
+.mod-header {
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.mod-status {
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 5px currentColor;
+}
+
+.mod-status.pending {
+    color: #444;
+    text-shadow: none;
+}
+
+.mod-status.safe {
+    color: var(--accent-green);
+}
+
+.mod-status.danger {
+    color: var(--accent-red);
+}
+
+.mod-status.warning {
+    color: orange;
+}
+
+/* TERMINAL LOGS */
+.terminal-window {
+    margin-top: 20px;
+    height: 150px;
+    background: #000;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+.term-header {
+    border-bottom: 1px solid #333;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.log-line {
+    margin-bottom: 3px;
+}
+
+.log-line::before {
+    content: '> ';
+    color: #555;
+}
+
+/* --- DFA VISUALIZER STYLES --- */
+.dfa-visualizer {
+    margin-bottom: 25px;
+    background: #000;
+    border: 1px solid #1f2933;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.state-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    /* Connectors bridge the gap */
+    margin-bottom: 10px;
+}
+
+/* NODES (The Circles) */
+.state-node {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background: #0d1117;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Double Ring for Final State q3 */
+.double-ring::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+/* CONNECTORS (The Lines) */
+.connector {
+    width: 50px;
+    height: 3px;
+    background: #333;
+    transition: all 0.3s ease;
+}
+
+/* --- ANIMATION STATES --- */
+
+/* Active Node (Blue Glow) */
+.state-node.active {
+    border-color: #00f3ff;
+    color: #fff;
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
+    transform: scale(1.1);
+}
+
+/* Success Node (Green Glow) */
+.state-node.active-success {
+    border-color: #00ff41;
+    color: #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+}
+
+/* Error Node (Red Glow) */
+.state-node.active-error {
+    border-color: #ff003c;
+    color: #ff003c;
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.6);
+}
+
+/* Active Connector (Blue Line) */
+.connector.active {
+    background: #00f3ff;
+    box-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+}
+
+.dfa-label {
+    margin-top: 10px;
+    font-size: 10px;
+    color: #444;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+.term-header {
+    display: flex;
+    justify-content: space-between;
+    /* Pushes button to right */
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.clear-btn {
+    cursor: pointer;
+    color: var(--accent-red);
+    font-size: 10px;
+}
+
+.clear-btn:hover {
+    text-decoration: underline;
+    color: #fff;
+}
