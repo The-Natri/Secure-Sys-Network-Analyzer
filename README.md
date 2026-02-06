@@ -1,7 +1,5 @@
 # SECURE.SYS // Hybrid Network Security Analyzer
 
-### A Theory of Computation (TOC) Capstone Project
-
 ## 🛡️ Project Overview
 
 SECURE.SYS is a next-generation network traffic analyzer that combines **Deterministic Finite Automata (DFA)** with **Machine Learning (AI)** to detect cyber threats in real-time. Unlike traditional firewalls that rely solely on static rules, this system uses a hybrid approach:
